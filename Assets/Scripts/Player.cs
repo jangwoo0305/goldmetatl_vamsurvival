@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         // rigid.AddForce(inputVec);
         // // 2. 속도 제어
         // rigid.linearVelocity = inputVec;
-        Vector2 newVec = inputVec.normalized * speed *  Time.fixedDeltaTime;
+        Vector2 newVec = inputVec.normalized * (speed * Time.fixedDeltaTime);
         // 3. 위치 이동
         rigid.MovePosition(rigid.position + newVec);
     }

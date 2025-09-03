@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -12,13 +13,6 @@ public class Player : MonoBehaviour
         rigid =  GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
-    }
-
     void FixedUpdate()
     {
         // rigid.linearVelocity = inputVec;
@@ -26,8 +20,13 @@ public class Player : MonoBehaviour
         // rigid.AddForce(inputVec);
         // // 2. 속도 제어
         // rigid.linearVelocity = inputVec;
-        Vector2 newVec = inputVec.normalized * (speed * Time.fixedDeltaTime);
+        Vector2 newVec = inputVec * (speed * Time.fixedDeltaTime);
         // 3. 위치 이동
         rigid.MovePosition(rigid.position + newVec);
+    }
+
+    void OnMove(InputValue value)
+    {
+        inputVec = value.Get<Vector2>();
     }
 }
